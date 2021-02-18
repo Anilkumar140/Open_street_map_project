@@ -1,0 +1,351 @@
+<html>
+  <head>
+    <title>Leaflet Address Lookup and Coordinates</title>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 95%;
+        max-width: 980px;
+        padding: 1% 2%;
+        margin: 0 auto;
+      }
+      #lat,
+      #lon {
+        text-align: right;
+      }
+      #map {
+        width: 100%;
+        height: 50%;
+        padding: 0;
+        margin: 0;
+      }
+      .address {
+        cursor: pointer;
+      }
+      .address:hover {
+        color: #aa0000;
+        text-decoration: underline;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Create two equal columns that floats next to each other */
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: auto; /* Should be removed. Only for demonstration */
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <center>
+        <h1><u>Browse Map</u></h1>
+      </center>
+
+      <b>Coordinates</b>
+      <div>
+        <input type="text" name="lat" id="lat" size="12" value="" />
+        <input type="text" name="lon" id="lon" size="12" value="" />
+        <button onclick="get_addressname()">Search</button>
+      </div>
+      <div id="address_box"></div>
+
+      <br />
+      <hr />
+      <b>Search from CountryCode and Pincode</b>
+      <div>
+        <input
+          type="text"
+          name="cc"
+          id="cc"
+          size="12"
+          value=""
+          placeholder="country_code"
+        />
+        <input
+          type="text"
+          name="pin"
+          id="pin"
+          size="12"
+          value=""
+          placeholder="pincode"
+        />
+        <button onclick="fromPincode()">Search</button>
+      </div>
+      <div id="placeName"></div>
+      <br />
+      <hr />
+
+      <b>Address Lookup</b>
+      <div id="search">
+        <input type="text" name="addr" value="" id="addr" size="58" />
+        <button type="button" onclick="addr_search(); get_coordinate();">
+          Search
+        </button>
+        <div class="row">
+          <div class="column">
+            <h3 class="res1" style="display: none">Search Result 1</h3>
+            <div id="results"></div>
+          </div>
+          <div class="column">
+            <h3 class="res2" style="display: none">Search Result 2</h3>
+            <div id="results2"></div>
+          </div>
+        </div>
+      </div>
+      <br />
+      <hr />
+
+      <div id="map"></div>
+    </div>
+
+    <script type="text/javascript">
+      // New York
+      var startlat = 4.2105;
+      var startlon = 101.9758;
+
+      var options = {
+        center: [startlat, startlon],
+        zoom: 9,
+      };
+
+      document.getElementById("lat").value = startlat;
+      document.getElementById("lon").value = startlon;
+
+      var map = L.map("map", options);
+      var nzoom = 12;
+
+      L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+        attribution: "OSM",
+      }).addTo(map);
+
+      var myMarker = L.marker([startlat, startlon], {
+        title: "Coordinates",
+        alt: "Coordinates",
+        draggable: true,
+      })
+        .addTo(map)
+        .on("dragend", function () {
+          var lat = myMarker.getLatLng();
+          var lon = myMarker.getLatLng();
+          var czoom = map.getZoom();
+          if (czoom < 18) {
+            nzoom = czoom + 2;
+          }
+          if (nzoom > 18) {
+            nzoom = 18;
+          }
+          if (czoom != 18) {
+            map.setView([lat, lon], nzoom);
+          } else {
+            map.setView([lat, lon]);
+          }
+          document.getElementById("lat").value = lat;
+          document.getElementById("lon").value = lon;
+          myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+        });
+
+      function chooseAddr(lat1, lng1) {
+        myMarker.closePopup();
+        map.setView([lat1, lng1], 10);
+        myMarker.setLatLng([lat1, lng1]);
+        lat = lat1.toFixed(8);
+        lon = lng1.toFixed(8);
+        document.getElementById("lat").value = lat;
+        document.getElementById("lon").value = lon;
+        myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+      }
+
+      function myFunction(arr) {
+        var out = "<br />";
+        var i;
+
+        if (arr.length > 0) {
+          $(".res1").show();
+          for (i = 0; i < arr.length; i++) {
+            out +=
+              "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" +
+              arr[i].lat +
+              ", " +
+              arr[i].lon +
+              ");return false;'>" +
+              arr[i].display_name +
+              "</div>";
+          }
+          document.getElementById("results").innerHTML = out;
+        } else {
+          document.getElementById("results").innerHTML = "Sorry, no results...";
+        }
+      }
+
+      function getResult(arr) {
+        var out = "<br />";
+        var i;
+        if (arr.length > 0) {
+          $(".res2").show();
+          for (i = 0; i < arr.length; i++) {
+            out +=
+              "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" +
+              arr[i].latitude +
+              ", " +
+              arr[i].longitude +
+              ");return false;'>" +
+              arr[i].label +
+              "</div>";
+          }
+          document.getElementById("results2").innerHTML = out;
+        } else {
+          document.getElementById("results2").innerHTML =
+            "Sorry, no results...";
+        }
+      }
+      //address search
+      function addr_search() {
+        var inp = document.getElementById("addr");
+        var xmlhttp = new XMLHttpRequest();
+        var url =
+          "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" +
+          inp.value;
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            myFunction(myArr);
+          }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+      }
+      // get the coordinates
+      function get_coordinate() {
+        var inp = document.getElementById("addr");
+        var xmlhttp = new XMLHttpRequest();
+        var url =
+          "http://api.positionstack.com/v1/forward?access_key=72c76ad8082ee9e135c2834394c63dfa&query=" +
+          inp.value;
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            console.log("2nd Search: ", myArr.data);
+            getResult(myArr.data);
+          }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+      }
+
+      // Search address by name
+      function get_addressname() {
+        var lat = document.getElementById("lat").value;
+        var lon = document.getElementById("lon").value;
+        var xmlhttp = new XMLHttpRequest();
+        var url =
+          "http://api.positionstack.com/v1/reverse?access_key=72c76ad8082ee9e135c2834394c63dfa&query=" +
+          lat +
+          "," +
+          lon;
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            // console.log('address: ',myArr.data);
+            printAddress(myArr.data);
+          }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+      }
+
+      function printAddress(arr) {
+        var out = "<br />";
+        var i;
+        if (arr.length > 0) {
+          for (i = 0; i < arr.length; i++) {
+            out +=
+              "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" +
+              arr[i].latitude +
+              ", " +
+              arr[i].longitude +
+              ");return false;'>" +
+              arr[i].label +
+              "</div>";
+          }
+          document.getElementById("address_box").innerHTML = out;
+        } else {
+          document.getElementById("address_box").innerHTML =
+            "Sorry, no results...";
+        }
+      }
+
+      // Search from pincode
+      function fromPincode() {
+        var country_code = $("#cc").val();
+        var pincode = $("#pin").val();
+        var protocol = window.location.protocol;
+        var host = window.location.host;
+        if (country_code != "" && pincode != "") {
+          var settings = {
+            url: protocol + "//" + host + "/fromzip",
+            method: "POST",
+            timeout: 0,
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Basic YWRtaW46QWRtaW5AMTIz",
+            },
+            data: JSON.stringify({
+              pincode: pincode,
+              country_code: country_code,
+            }),
+          };
+
+          $.ajax(settings).done(function (response) {
+            fetchAddress(response);
+          });
+        } else {
+          alert("Plzzz dont left any field blank");
+        }
+      }
+
+      function fetchAddress(arr) {
+        if (arr.latitude == null) {
+          alert(
+            "make sure, You have given the proper country_code and pincode!!!"
+          );
+        } else {
+          chooseAddr(arr.latitude, arr.longitude);
+          var out = "<br />";
+          out +=
+            "<div class='address' title='Show Location and Coordinates' return false;'>" +
+            arr.place_name +
+            "</div><div><span>" +
+            arr.state_name +
+            " , " +
+            arr.community_name +
+            " </span></div>";
+          document.getElementById("placeName").innerHTML = out;
+        }
+      }
+    </script>
+  </body>
+</html>

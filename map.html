@@ -1,0 +1,143 @@
+<html>
+    <body>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+        <link href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <form method="POST">
+            {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Submit">
+        </form>
+        <button onclick="location.href='{% url 'viewMap' %}'">Show Current Location</button>
+        <div id="osm-map"></div>
+        <p id="demo"></p>
+        <style>
+            @-moz-keyframes blink {
+                0% {
+                    opacity:1;
+                }
+                50% {
+                    opacity:0;
+                }
+                100% {
+                    opacity:1;
+                }
+            } 
+
+            @-webkit-keyframes blink {
+                0% {
+                    opacity:1;
+                }
+                50% {
+                    opacity:0;
+                }
+                100% {
+                    opacity:1;
+                }
+            }
+            /* IE */
+            @-ms-keyframes blink {
+                0% {
+                    opacity:1;
+                }
+                50% {
+                    opacity:0;
+                }
+                100% {
+                    opacity:1;
+                }
+            } 
+            /* Opera and prob css3 final iteration */
+            @keyframes blink {
+                0% {
+                    opacity:1;
+                }
+                50% {
+                    opacity:0;
+                }
+                100% {
+                    opacity:1;
+                }
+            } 
+            .blink-image {
+                -moz-animation: blink normal 2s infinite ease-in-out; /* Firefox */
+                -webkit-animation: blink normal 2s infinite ease-in-out; /* Webkit */
+                -ms-animation: blink normal 2s infinite ease-in-out; /* IE */
+                animation: blink normal 2s infinite ease-in-out; /* Opera and prob css3 final iteration */
+            }
+        </style>
+        <script>
+        $(document).ready(function(){
+            var data = "{{ loc }}"
+            if (data == "current_location"){
+                $("#demo").html("Showing Current Location");
+                getCurrentLocation();
+            }else{
+                $("select").val(data);
+                $("#demo").html("Showing the selected location");
+                getRandomLocation(data);
+            }
+            setTimeout(function(){
+                $('.leaflet-pane.leaflet-marker-pane > img').addClass('blink-image');
+            },1000)
+        })
+        function getRandomLocation(data){
+            var protocol = window.location.protocol;
+            var url = window.location.host;
+            console.log(protocol, url)
+            var settings = {
+            "url": protocol+"//"+ url +"/api/v1/my_latlong/?city="+data,
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Basic YWRtaW46QWRtaW5AMTIz",
+            },
+            };
+
+            $.ajax(settings).done(function (response) {
+            showMap(JSON.stringify(response));
+            });
+        }
+        function showMap(response){
+           console.log(response);
+            var data = JSON.parse(response);
+               //Where you want to render the map.
+               var element = document.getElementById('osm-map');
+
+                // // Height has to be set. You can do this in CSS too.
+                element.style = 'height:500px; width:1000px';
+
+                // // Create Leaflet map on map element.
+                var map = L.map(element);
+
+                // // Add OSM tile leayer to the Leaflet map.
+                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://Centroxy.com">Centroxy</a> contributors'
+                }).addTo(map);
+            for(i=0;i<data.length;i++){
+                var latt = data[i].lattitude;
+                var long = data[i].longitude;
+              
+                var target = L.latLng(latt, long);
+
+                map.setView(target, 14);
+                L.marker(target).addTo(map);
+            }
+            
+            
+        }
+        
+        function getCurrentLocation(){
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+              } else { 
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            var data = [{"lattitude":position.coords.latitude, "longitude":position.coords.longitude}]
+            showMap(JSON.stringify(data));
+            }
+        </script>
+    </body>
+</html>
