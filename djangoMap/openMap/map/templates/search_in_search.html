@@ -212,7 +212,7 @@ number of visitors
       });
     
            
-      // New York
+      // kuala lumpur
       var startlat = 3.1390;
       var startlon = 101.6869;
 
@@ -232,6 +232,13 @@ number of visitors
                 maxZoom: 40,
                 attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
             }).addTo(map);
+
+
+            //set the boundary to the view
+             console.log(map.getBounds().getSouthWest().toString());
+             console.log(map.getBounds().getNorthEast().toString());
+             map.setMaxBounds(map.getBounds());
+
             const leafletMarkers = L.layerGroup([
                 new L.marker([3.2140, 101.6356]),
                 new L.marker([3.1917, 101.6734]),
