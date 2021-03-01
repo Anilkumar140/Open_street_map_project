@@ -33,7 +33,7 @@
   integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
   crossorigin=""></script>
 
-  <script type="text/javascript" src="../static/geojson/cordinates.json "> </script>
+  <!-- <script type="text/javascript" src="../static/geojson/cordinates.json "> </script> -->
     <style type="text/css">
       html,
       body {
@@ -460,10 +460,11 @@ $(document).on('change', 'input', function(){
          console.log(val);
 
          var arrayin= val.split(',');
-         console.log(arrayin[2]+"....AND....."+arrayin[3]);
+         console.log(arrayin[2]+"....AND....."+arrayin[3]+"AND"+arrayin[4]);
+if(arrayin[4]=== "1"){
          myMarker.closePopup();
-  latitute4 = arrayin[2];
-  longitute4 = arrayin[3];
+        latitute4 = arrayin[2];
+        longitute4 = arrayin[3];
         map.setView([ latitute4,longitute4] , 17);
         myMarker.setLatLng([ latitute4,longitute4]);
         // lat =latitute4.toFixed(8);
@@ -472,6 +473,19 @@ $(document).on('change', 'input', function(){
    
         // schedule(val);
           break;
+}
+else {
+  myMarker.closePopup();
+        latitute4 = arrayin[2];
+        longitute4 = arrayin[3];
+        console.log("my latitude is this........................................"+latitute4)
+        map.setView([ latitute4,longitute4] , 17);
+        // myMarker.bindPopup("<br/>Lat " +  latitute4 + "<br />Lon " + longitute4).openPopup();
+   
+   // schedule(val);
+     break;
+ 
+}
        }
     }
 });
@@ -1043,110 +1057,110 @@ searchControl.on("results", function (data) {
 }
 });
 
-function schedule(selectedValue){
+// function schedule(selectedValue){
 
-   console.log(selectedValue)
-   if(selectedValue == "kepong"){
-    myMarker.closePopup();
-  latitute1 = 3.21473900;
-  longitute1 = 101.63761000;
-        map.setView([3.21473900,101.63761000], 17);
-        myMarker.setLatLng([3.21473900,101.63761000]);
-        lat =latitute1.toFixed(8);
-        lon = latitute1.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute1 + "<br />Lon " + longitute1).openPopup();
-   }
-  else  if(selectedValue == "segambut"){
-    myMarker.closePopup();
-  latitute2 = 3.18333;
-  longitute2 = 101.65;
-        map.setView([ latitute2,longitute2] , 17);
-        myMarker.setLatLng([ latitute2,longitute2 ]);
-        lat =latitute2.toFixed(8);
-        lon = latitute2.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute2 + "<br />Lon " + longitute2).openPopup();
-   }
-   else  if(selectedValue == "titiwangsa"){
-    myMarker.closePopup();
-  latitute3 = 3.178657;
-  longitute3 = 101.704403;
-        map.setView([ latitute3,longitute3] , 17);
-        myMarker.setLatLng([ latitute3,longitute3]);
-        lat =latitute3.toFixed(8);
-        lon = latitute3.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute3 + "<br />Lon " + longitute3).openPopup();
-   }
-   else  if(selectedValue == "wangsa maju"){
-    myMarker.closePopup();
-  latitute4 = 3.2038;
-  longitute4 = 101.7367;
-        map.setView([ latitute4,longitute4] , 17);
-        myMarker.setLatLng([ latitute4,longitute4]);
-        lat =latitute4.toFixed(8);
-        lon = latitute4.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute4 + "<br />Lon " + longitute4).openPopup();
-   }
-   else  if(selectedValue == "setiawangsa"){
-    myMarker.closePopup();
-  latitute5 = 3.1830;
-  longitute5 = 101.7462;
-        map.setView([ latitute5,longitute5] , 17);
-        myMarker.setLatLng([ latitute5,longitute5]);
-        lat =latitute5.toFixed(8);
-        lon = latitute5.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute5 + "<br />Lon " + longitute5).openPopup();
-   }
-   else  if(selectedValue == "bukit"){
-    myMarker.closePopup();
-  latitute6 = 3.146708;
-  longitute6 =101.711197;
-        map.setView([ latitute6,longitute6] , 17);
-        myMarker.setLatLng([ latitute6,longitute6]);
-        lat =latitute6.toFixed(8);
-        lon = latitute6.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute6 + "<br />Lon " + longitute6).openPopup();
-   }
-   else  if(selectedValue == "lemah pantai"){
-    myMarker.closePopup();
-  latitute7 = 3.1225;
-  longitute7 =101.66449;
-        map.setView([ latitute7,longitute7] , 17);
-        myMarker.setLatLng([ latitute7,longitute7]);
-        lat =latitute7.toFixed(8);
-        lon = latitute7.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute7 + "<br />Lon " + longitute7).openPopup();
-   }
-   else  if(selectedValue == "cheras"){
-    myMarker.closePopup();
-  latitute8 = 3.108932;
-  longitute8 = 101.728426;
-        map.setView([ latitute8,longitute8] , 17);
-        myMarker.setLatLng([ latitute8,longitute8]);
-        lat =latitute8.toFixed(8);
-        lon = latitute8.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute8 + "<br />Lon " + longitute8).openPopup();
-   }
-   else  if(selectedValue == "bandar tun razak"){
-    myMarker.closePopup();
-  latitute9 = 3.077438;
-  longitute9 =101.719666;
-        map.setView([ latitute9,longitute9] , 17);
-        myMarker.setLatLng([ latitute9,longitute9]);
-        lat =latitute9.toFixed(8);
-        lon = latitute9.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute9 + "<br />Lon " + longitute9).openPopup();
-   }
-   else  if(selectedValue == "seputeh"){
-    myMarker.closePopup();
-  latitute10 = 3.1150;
-  longitute10 =101.6797;
-        map.setView([ latitute10,longitute10] , 17);
-        myMarker.setLatLng([ latitute10,longitute10]);
-        lat =latitute10.toFixed(8);
-        lon = latitute10.toFixed(8);
-        myMarker.bindPopup("<br/>Lat " +  latitute10 + "<br />Lon " + longitute10).openPopup();
-   }
-}
+//    console.log(selectedValue)
+//    if(selectedValue == "kepong"){
+//     myMarker.closePopup();
+//   latitute1 = 3.21473900;
+//   longitute1 = 101.63761000;
+//         map.setView([3.21473900,101.63761000], 17);
+//         myMarker.setLatLng([3.21473900,101.63761000]);
+//         lat =latitute1.toFixed(8);
+//         lon = latitute1.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute1 + "<br />Lon " + longitute1).openPopup();
+//    }
+//   else  if(selectedValue == "segambut"){
+//     myMarker.closePopup();
+//   latitute2 = 3.18333;
+//   longitute2 = 101.65;
+//         map.setView([ latitute2,longitute2] , 17);
+//         myMarker.setLatLng([ latitute2,longitute2 ]);
+//         lat =latitute2.toFixed(8);
+//         lon = latitute2.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute2 + "<br />Lon " + longitute2).openPopup();
+//    }
+//    else  if(selectedValue == "titiwangsa"){
+//     myMarker.closePopup();
+//   latitute3 = 3.178657;
+//   longitute3 = 101.704403;
+//         map.setView([ latitute3,longitute3] , 17);
+//         myMarker.setLatLng([ latitute3,longitute3]);
+//         lat =latitute3.toFixed(8);
+//         lon = latitute3.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute3 + "<br />Lon " + longitute3).openPopup();
+//    }
+//    else  if(selectedValue == "wangsa maju"){
+//     myMarker.closePopup();
+//   latitute4 = 3.2038;
+//   longitute4 = 101.7367;
+//         map.setView([ latitute4,longitute4] , 17);
+//         myMarker.setLatLng([ latitute4,longitute4]);
+//         lat =latitute4.toFixed(8);
+//         lon = latitute4.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute4 + "<br />Lon " + longitute4).openPopup();
+//    }
+//    else  if(selectedValue == "setiawangsa"){
+//     myMarker.closePopup();
+//   latitute5 = 3.1830;
+//   longitute5 = 101.7462;
+//         map.setView([ latitute5,longitute5] , 17);
+//         myMarker.setLatLng([ latitute5,longitute5]);
+//         lat =latitute5.toFixed(8);
+//         lon = latitute5.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute5 + "<br />Lon " + longitute5).openPopup();
+//    }
+//    else  if(selectedValue == "bukit"){
+//     myMarker.closePopup();
+//   latitute6 = 3.146708;
+//   longitute6 =101.711197;
+//         map.setView([ latitute6,longitute6] , 17);
+//         myMarker.setLatLng([ latitute6,longitute6]);
+//         lat =latitute6.toFixed(8);
+//         lon = latitute6.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute6 + "<br />Lon " + longitute6).openPopup();
+//    }
+//    else  if(selectedValue == "lemah pantai"){
+//     myMarker.closePopup();
+//   latitute7 = 3.1225;
+//   longitute7 =101.66449;
+//         map.setView([ latitute7,longitute7] , 17);
+//         myMarker.setLatLng([ latitute7,longitute7]);
+//         lat =latitute7.toFixed(8);
+//         lon = latitute7.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute7 + "<br />Lon " + longitute7).openPopup();
+//    }
+//    else  if(selectedValue == "cheras"){
+//     myMarker.closePopup();
+//   latitute8 = 3.108932;
+//   longitute8 = 101.728426;
+//         map.setView([ latitute8,longitute8] , 17);
+//         myMarker.setLatLng([ latitute8,longitute8]);
+//         lat =latitute8.toFixed(8);
+//         lon = latitute8.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute8 + "<br />Lon " + longitute8).openPopup();
+//    }
+//    else  if(selectedValue == "bandar tun razak"){
+//     myMarker.closePopup();
+//   latitute9 = 3.077438;
+//   longitute9 =101.719666;
+//         map.setView([ latitute9,longitute9] , 17);
+//         myMarker.setLatLng([ latitute9,longitute9]);
+//         lat =latitute9.toFixed(8);
+//         lon = latitute9.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute9 + "<br />Lon " + longitute9).openPopup();
+//    }
+//    else  if(selectedValue == "seputeh"){
+//     myMarker.closePopup();
+//   latitute10 = 3.1150;
+//   longitute10 =101.6797;
+//         map.setView([ latitute10,longitute10] , 17);
+//         myMarker.setLatLng([ latitute10,longitute10]);
+//         lat =latitute10.toFixed(8);
+//         lon = latitute10.toFixed(8);
+//         myMarker.bindPopup("<br/>Lat " +  latitute10 + "<br />Lon " + longitute10).openPopup();
+//    }
+// }
 
 
 //Datalist one
@@ -1210,96 +1224,113 @@ request.onreadystatechange = function(response) {
       // Parse the JSON
       var jsonOptions = JSON.parse(request.responseText);
       var data = JSON.stringify(jsonOptions);
-  // console.log("myjson"+jsonOptions);
+  console.log("myjson"+jsonOptions);
       // console.log("my data"+data)
      
       var i;
       var j=0;
       var inputdata= document.getElementById("ajax1").value;
-      if(inputdata.toUpperCase()=== "KEPONG"){
-  for (i=0 ;i<jsonOptions.length ;i++)
-  {
-    // console.log(jsonOptions[i].parlamenName);
-   
-    values=jsonOptions[1].sb[j].ll[i].locality;
-    lati=jsonOptions[1].sb[j].ll[i].latitude;
-    loni=jsonOptions[1].sb[j].ll[i].longitude;
+      console.log(jsonOptions.length);
+      if(inputdata.toUpperCase() === "TITIWANGSA"){
+      for(i=0 ; i<jsonOptions[0].locality.length; i++){
+  
+       
+          values = jsonOptions[0].locality[i].locality
+          lati = jsonOptions[0].locality[i].latitude;
+          loni = jsonOptions[0].locality[i].longitude;
+          flag = jsonOptions[0].locality[i].flag
+          dataarray.push(values+","+lati+","+loni+","+flag);
 
-    dataarray.push(values+","+lati+","+loni);
-    localStorage.setItem("value",i+1);
-    console.log(jsonOptions[1].sb[j].ll.length);
-   
-    // if(localStorage.getItem('value') >= jsonOptions[1].sb[j].ll.length){
-    //   j++;
-    //   i=0;
-    //   values1=jsonOptions[1].sb[j].ll[0].locality;
-    //   console.log(i);
-    // console.log(jsonOptions[1].sb[j].ll[0].locality);
-    // dataarray.push(values1);
-    //   console.log("i value"+i+"j values"+j);
-    // }
-    if(localStorage.getItem('value') >=jsonOptions[1].sb[j].ll.length){
-     
-      j++
-      console.log(jsonOptions[1].sb[j].ll.length);
-      for(i=1; i<jsonOptions[1].sb[j].ll.length;i++ ){
-        console.log(jsonOptions[1].sb[j].ll[i].locality);
-        values1 =jsonOptions[1].sb[j].ll[i].locality;
-        lati=jsonOptions[1].sb[j].ll[i].latitude;
-    loni=jsonOptions[1].sb[j].ll[i].longitude;
-
-    dataarray.push(values1+","+lati+","+loni);
-
+        }
       }
-    }
-  }
+      else {
+        dataarray =[];
+        jQuery("#dataList2").empty();
+      }
+      // if(inputdata.toUpperCase()=== "KEPONG"){
+//   for (i=0 ;i<jsonOptions.length ;i++)
+//   {
+//     // console.log(jsonOptions[i].parlamenName);
+   
+//     values=jsonOptions[1].sb[j].ll[i].locality;
+//     lati=jsonOptions[1].sb[j].ll[i].latitude;
+//     loni=jsonOptions[1].sb[j].ll[i].longitude;
+
+//     dataarray.push(values+","+lati+","+loni);
+//     localStorage.setItem("value",i+1);
+//     console.log(jsonOptions[1].sb[j].ll.length);
+   
+//     // if(localStorage.getItem('value') >= jsonOptions[1].sb[j].ll.length){
+//     //   j++;
+//     //   i=0;
+//     //   values1=jsonOptions[1].sb[j].ll[0].locality;
+//     //   console.log(i);
+//     // console.log(jsonOptions[1].sb[j].ll[0].locality);
+//     // dataarray.push(values1);
+//     //   console.log("i value"+i+"j values"+j);
+//     // }
+//     if(localStorage.getItem('value') >=jsonOptions[1].sb[j].ll.length){
+     
+//       j++
+//       console.log(jsonOptions[1].sb[j].ll.length);
+//       for(i=1; i<jsonOptions[1].sb[j].ll.length;i++ ){
+//         console.log(jsonOptions[1].sb[j].ll[i].locality);
+//         values1 =jsonOptions[1].sb[j].ll[i].locality;
+//         lati=jsonOptions[1].sb[j].ll[i].latitude;
+//     loni=jsonOptions[1].sb[j].ll[i].longitude;
+
+//     dataarray.push(values1+","+lati+","+loni);
+
+//       }
+//     }
+//   }
   
     
-  }
- else  if(inputdata.toUpperCase()=== "BATU"){
-   jQuery("#json-datalist2").empty();
-   dataarray=[];
-  for (i=0 ;i<jsonOptions.length ;i++)
-  {
-    // console.log(jsonOptions[i].parlamenName);
+//   }
+//  else  if(inputdata.toUpperCase()=== "BATU"){
+//    jQuery("#json-datalist2").empty();
+//    dataarray=[];
+//   for (i=0 ;i<jsonOptions.length ;i++)
+//   {
+//     // console.log(jsonOptions[i].parlamenName);
    
-    values=jsonOptions[0].sb[j].ll[i].locality;
-    lati=jsonOptions[0].sb[j].ll[i].latitude;
-    loni=jsonOptions[0].sb[j].ll[i].longitude;
+//     values=jsonOptions[0].sb[j].ll[i].locality;
+//     lati=jsonOptions[0].sb[j].ll[i].latitude;
+//     loni=jsonOptions[0].sb[j].ll[i].longitude;
 
-    dataarray.push(values+","+lati+","+loni);
+//     dataarray.push(values+","+lati+","+loni);
   
-    localStorage.setItem("value",i+1);
-    console.log(jsonOptions[0].sb[j].ll.length);
+//     localStorage.setItem("value",i+1);
+//     console.log(jsonOptions[0].sb[j].ll.length);
    
-    // if(localStorage.getItem('value') >= jsonOptions[1].sb[j].ll.length){
-    //   j++;
-    //   i=0;
-    //   values1=jsonOptions[1].sb[j].ll[0].locality;
-    //   console.log(i);
-    // console.log(jsonOptions[1].sb[j].ll[0].locality);
-    // dataarray.push(values1);
-    //   console.log("i value"+i+"j values"+j);
-    // }
-    if(localStorage.getItem('value') >=jsonOptions[0].sb[j].ll.length){
+//     // if(localStorage.getItem('value') >= jsonOptions[1].sb[j].ll.length){
+//     //   j++;
+//     //   i=0;
+//     //   values1=jsonOptions[1].sb[j].ll[0].locality;
+//     //   console.log(i);
+//     // console.log(jsonOptions[1].sb[j].ll[0].locality);
+//     // dataarray.push(values1);
+//     //   console.log("i value"+i+"j values"+j);
+//     // }
+//     if(localStorage.getItem('value') >=jsonOptions[0].sb[j].ll.length){
      
-      j++
-      console.log(jsonOptions[0].sb[j].ll.length);
-      for(i=1; i<jsonOptions[0].sb[j].ll.length;i++ ){
-        console.log(jsonOptions[0].sb[j].ll[i].locality);
-        values1 =jsonOptions[0].sb[j].ll[i].locality;
-        lati=jsonOptions[1].sb[j].ll[i].latitude;
-    loni=jsonOptions[1].sb[j].ll[i].longitude;
+//       j++
+//       console.log(jsonOptions[0].sb[j].ll.length);
+//       for(i=1; i<jsonOptions[0].sb[j].ll.length;i++ ){
+//         console.log(jsonOptions[0].sb[j].ll[i].locality);
+//         values1 =jsonOptions[0].sb[j].ll[i].locality;
+//         lati=jsonOptions[1].sb[j].ll[i].latitude;
+//     loni=jsonOptions[1].sb[j].ll[i].longitude;
 
-    dataarray.push(values1+","+lati+","+loni);
+//     dataarray.push(values1+","+lati+","+loni);
       
 
-      }
-    }
-  }
+//       }
+//     }
+//   }
   
     
-  }
+//   }
     
 console.log("data array"+dataarray);
 dataarray.forEach(function(item) {
