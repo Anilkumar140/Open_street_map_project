@@ -65,3 +65,9 @@ def showgis(request):
     
 def arcgisdemo(request):
     return render(request,'arcgisdemo2.html')
+
+def restrict(request):
+    return render(request,'resctrictmap.html')
+
+def auto_search(request):
+    return render(request,'auto_search.html')

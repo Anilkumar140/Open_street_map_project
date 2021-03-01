@@ -18,4 +18,7 @@ urlpatterns = [
     path('searchmymap',views.search_mymap),
     path('showgis',views.showgis),
     path('showgis2',views.arcgisdemo),
+    path('restrict',views.restrict),
+    path('autosearch',views.auto_search),
+
 ]

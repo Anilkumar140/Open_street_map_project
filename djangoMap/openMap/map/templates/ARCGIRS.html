@@ -1,198 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+    <meta charset="utf-8" />
+    <title>Display a satellite map on a webpage</title>
     <meta
       name="viewport"
-      content="initial-scale=1, maximum-scale=1,user-scalable=no"
-    />
-    <title>Basemaps</title>
-    <link
-      rel="shortcut icon"
-      href="//esri.github.io/quickstart-map-js/images/favicon.ico"
-    />
-    <!-- ArcGIS API for JavaScript CSS-->
-    <link rel="stylesheet" href="//js.arcgis.com/3.10/js/esri/css/esri.css" />
-    <!-- Web Framework CSS - Bootstrap (getbootstrap.com) and Bootstrap-map-js (github.com/esri/bootstrap-map-js) -->
-    <link
-      rel="stylesheet"
-      href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-      rel="stylesheet"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
     />
     <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css"
       rel="stylesheet"
-      href="//esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css"
     />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
     <style>
-      html,
-      body,
-      #mapDiv {
-        height: 100%;
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map1 {
+        position: absolute;
+        top: 0;
+        bottom: 0;
         width: 100%;
       }
     </style>
-
-    <!-- ArcGIS API for JavaScript library references -->
-    <script src="//js.arcgis.com/3.10compact"></script>
-    <script>
-      require(["esri/map", "dojo/on", "dojo/dom", "dojo/domReady!"], function (
-        Map,
-        on,
-        dom
-      ) {
-        // Create map
-        var map = new Map("mapDiv", {
-          basemap: "gray",
-          center: [-122.69, 45.52],
-          zoom: 3,
-        });
-
-        // Wire UI Events
-        on(dom.byId("btnStreets"), "click", function () {
-          map.setBasemap("streets");
-        });
-        on(dom.byId("btnSatellite"), "click", function () {
-          map.setBasemap("satellite");
-        });
-        on(dom.byId("btnHybrid"), "click", function () {
-          map.setBasemap("hybrid");
-        });
-        on(dom.byId("btnTopo"), "click", function () {
-          map.setBasemap("topo");
-        });
-        on(dom.byId("btnGray"), "click", function () {
-          map.setBasemap("gray");
-        });
-        on(dom.byId("btnNatGeo"), "click", function () {
-          map.setBasemap("national-geographic");
-        });
-      });
-    </script>
   </head>
   <body>
-    <div class="panel panel-primary panel-fixed">
-      <div class="panel-heading">
-        <h3 class="panel-title">Basemaps</h3>
-      </div>
-      <div class="panel-body">
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <button id="btnStreets" class="btn btn-default">Streets</button>
-            <button id="btnSatellite" class="btn btn-default">Satellite</button>
-            <button id="btnHybrid" class="btn btn-default">Hybrid</button>
-            <button id="btnTopo" class="btn btn-default">Topo</button>
-          </div>
-        </div>
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <button id="btnGray" class="btn btn-default">Gray</button>
-            <button id="btnNatGeo" class="btn btn-default">
-              National Geographic
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="mapDiv"></div>
-  </body>
-</html>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
-    <meta
-      name="viewport"
-      content="initial-scale=1, maximum-scale=1,user-scalable=no"
-    />
-    <title>Basemaps</title>
-    <link
-      rel="shortcut icon"
-      href="//esri.github.io/quickstart-map-js/images/favicon.ico"
-    />
-    <!-- ArcGIS API for JavaScript CSS-->
-    <link rel="stylesheet" href="//js.arcgis.com/3.10/js/esri/css/esri.css" />
-    <!-- Web Framework CSS - Bootstrap (getbootstrap.com) and Bootstrap-map-js (github.com/esri/bootstrap-map-js) -->
-    <link
-      rel="stylesheet"
-      href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="//esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css"
-    />
-    <style>
-      html,
-      body,
-      #mapDiv {
-        height: 100%;
-        width: 100%;
-      }
-    </style>
-
-    <!-- ArcGIS API for JavaScript library references -->
-    <script src="//js.arcgis.com/3.10compact"></script>
+    <div id="map1"></div>
     <script>
-      require(["esri/map", "dojo/on", "dojo/dom", "dojo/domReady!"], function (
-        Map,
-        on,
-        dom
-      ) {
-        // Create map
-        var map = new Map("mapDiv", {
-          basemap: "gray",
-          center: [-122.69, 45.52],
-          zoom: 3,
-        });
-
-        // Wire UI Events
-        on(dom.byId("btnStreets"), "click", function () {
-          map.setBasemap("streets");
-        });
-        on(dom.byId("btnSatellite"), "click", function () {
-          map.setBasemap("satellite");
-        });
-        on(dom.byId("btnHybrid"), "click", function () {
-          map.setBasemap("hybrid");
-        });
-        on(dom.byId("btnTopo"), "click", function () {
-          map.setBasemap("topo");
-        });
-        on(dom.byId("btnGray"), "click", function () {
-          map.setBasemap("gray");
-        });
-        on(dom.byId("btnNatGeo"), "click", function () {
-          map.setBasemap("national-geographic");
-        });
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoianVnYWRhIiwiYSI6ImNrbDZyMTFrNDBseTQydm4yNmM0enJoeDcifQ.HALgnKo6H_4dFr1sbpxk9w";
+      var map = new mapboxgl.Map({
+        container: "map1", // container ID
+        style: "mapbox://styles/mapbox/satellite-v9", // style URL
+        center: [101.69425964355469, 3.228956566890715], // starting position [lng, lat]
+        zoom: 1, // starting zoom
       });
     </script>
-  </head>
-  <body>
-    <div class="panel panel-primary panel-fixed">
-      <div class="panel-heading">
-        <h3 class="panel-title">Basemaps</h3>
-      </div>
-      <div class="panel-body">
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <button id="btnStreets" class="btn btn-default">Streets</button>
-            <button id="btnSatellite" class="btn btn-default">Satellite</button>
-            <button id="btnHybrid" class="btn btn-default">Hybrid</button>
-            <button id="btnTopo" class="btn btn-default">Topo</button>
-          </div>
-        </div>
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <button id="btnGray" class="btn btn-default">Gray</button>
-            <button id="btnNatGeo" class="btn btn-default">
-              National Geographic
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="mapDiv"></div>
   </body>
 </html>

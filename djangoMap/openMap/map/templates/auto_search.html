@@ -1,0 +1,836 @@
+<html>
+  <head>
+    <title>Leaflet Address Lookup and Coordinates</title>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+    />
+ 
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
+
+    <style type="text/css">
+      html,
+      body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 5px;
+      }
+      .container {
+        width: 95%;
+        max-width: 980px;
+        padding: 1% 2%;
+        margin: 0 auto;
+      }
+      #lat,
+      #lon {
+        text-align: right;
+      }
+      #map {
+        width: 100%;
+        height: 50%;
+        padding: 0;
+        margin: 0;
+      }
+      .address {
+        cursor: pointer;
+      }
+      .address:hover {
+        color: #aa0000;
+        text-decoration: underline;
+      }
+      .column {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        height: 4--px; /* Should be removed. Only for demonstration */
+        background-image: url("https://www.maxpixel.net/static/photo/1x/Background-Pattern-Arrangement-Texture-Diamonds-641909.jpg");
+      }
+      .column1 {
+        float: left;
+        width: 24%;
+        padding: 10px;
+        height: 700px; /* Should be removed. Only for demonstration */
+      }
+      .column2 {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        height: 700px; 
+       /* Should be removed. Only for demonstration */
+      }
+      .div1 {
+  padding: 39px;
+
+}
+#img1{
+  width: 80px;
+  height:59px;
+}
+select {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-padding-end: 20px;
+    -moz-padding-end: 20px;
+    -webkit-padding-start: 2px;
+    -moz-padding-start: 2px;
+   /* Standard syntax; must be last */
+    background-position: center right;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    border-radius: 2px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-size: inherit;
+    margin: 0;
+    overflow: hidden;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dropbtn {
+  background-color:gray;
+  color: white;
+
+  border: none;
+  cursor: pointer;
+height:23px;
+width:27px;
+}
+.dropbtn1{
+  background-color:gray;
+  color: white;
+
+  border: none;
+  cursor: pointer;
+height:23px;
+width:27px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: unset;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content div{
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content div:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+    </style>
+  </head>
+  <body style="margin:0;padding:0">
+    <div class="row">
+      <div class="column" style="background-color: white">
+        <!-- <img id="img1" src="/static/img/images.jfif"/><br> -->
+        <font color="white">Logo Here</font>
+       <font color="yellow"> <h5 style="margin-left: 29px; margin-bottom: 11px; margin-top: 10px;">Department of health and environment</h5></font>
+
+        <div class="div1">
+          <font color="white">
+            Monday, July 10, 2020
+            <br />
+            <br />
+            <br />
+            Main page
+            <br />
+            <br />
+            List of service areas
+            <br />
+            <br />
+            Cleaning & collection activity schedule
+            <br />
+            <br />
+            Application and review of PPSPPA applications
+            <br>
+            <br>
+            Public complaint
+
+          </font>
+          
+          <div style="margin-top:50px ;">
+      <font color="white">  
+ <i class="fa fa-question-circle" aria-hidden="true"></i> 
+
+Frequently asked &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;questions  
+<br>
+<br>
+<i class="fa fa-phone" aria-hidden="true"></i>
+Contact us
+<br>
+<br>
+<i class="fa fa-users" aria-hidden="true"></i>
+Number of visitors
+</font>
+</div>
+
+
+</div>
+        </div>
+      </div>
+      <div class="column1" style="background-color: white">
+        <h2>list of service areas</h2>
+        <form>
+          <input type="text" name="lat" id="lat" size="12" value="" />
+          <input type="text" name="lon" id="lon" size="12" value="" />
+        </form>
+        Parliament:
+        <div id="search">
+          <!-- id="addr" -->
+          <!-- <select id="addr" style="width:80%;">
+            <option value="batu">batu</option>
+            <option value="Kepong">kepong</option>
+            <option value="segambut">segambut</option>
+            <option value="titiwangsa">titiwangsa</option>
+            <option value="wangsa maju">wangsa maju</option>
+            <option value="setiawangsa">setiawangsa</option>
+            <option value="bukit">bukit</option>
+            <option value="bintang">bintang</option>
+            <option value="lemah pantai">lemah pantai</option>  
+            <option value="cheras">cheras</option>
+            <option value="bandar tun razak">bandar tun razak</option>
+            <option value="seputeh">seputeh</option>
+            <option value="bhubaneswar">bhubaneswar</option>
+          </select> -->
+          <!-- <br />
+        </br> -->
+          <input type="text" name="addr" value="" id="addr" style="width:80%;" size="58" />
+          <div class="dropdown">
+            <button class="dropbtn" onclick="addr_search();"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <div id="myDropdown" class="dropdown-content">
+              <div id="results3"></div>
+              <div id="results"></div>
+              <!-- <a href="#">Link 3</a> -->
+            </div>
+          </div>
+          <br>
+          <br>
+          Location:
+          <br>
+          
+          <input type='text' id='subsearch' >
+         
+          <div class="dropdown">
+            <button class="dropbtn fa fa-search" onclick='subsearch(arrData 
+          
+            );return false;'></button>
+            <!-- <button class="dropbtn" onclick="subsearch();"><i class="fa fa-search" aria-hidden="true"></i></button> -->
+            <div id="myDropdown" class="dropdown-content">
+              <div id="results3"></div>
+              <div id="results"></div>
+          
+            </div>
+          </div>
+         
+            </div>
+          </div>
+          <!-- <button type="button" onclick="addr_search();"><i class="fa fa-search" aria-hidden="true"></i></button> -->
+          <br>
+          <!-- Location: -->
+        </div>
+       
+         <div class="container">
+          <div id="results2"></div> 
+            </div> 
+      </div>
+      <div class="column2" style="background-color:white;" >
+       <h4 style="text-align: right; margin-top: 0px; margin-bottom: 7px;">Search The List Of Service Area</h4>
+          <div style="width: 100%; height: 80%; margin-bottom: 170  px; margin-top: 2px;" id="map"></div>
+      </div>
+    </div>
+    <!-- <input type="text" list="hosting-plan" /> -->
+    <!-- <datalist id="hosting-plan"></datalist> -->
+    
+    <script type="text/javascript">
+    window.onUnLoad= function (evt) { 
+ //your code goes here
+ window.open("yourpage/some link");
+}
+  var arrData;
+  var locality;
+  var locality1;
+
+ 
+    $(document).ready(function () {
+   
+        $(".leaflet-pane .leaflet-marker-pane img").attr(
+          "src",
+          "http://localhost:8000/static/img/marker.gif"
+        );
+        $(".leaflet-pane .leaflet-marker-pane img").css("height", "50px");
+        $(".leaflet-pane .leaflet-marker-pane img").css("width", "40px");
+      });
+      $.getJSON(
+            "/static/geojson/kuala_lumpur.geojson",
+            function (hoodData) {
+              L.geoJson(hoodData).addTo(map);
+              
+            }
+          );
+      function myFunction() {
+        // addr_search();
+  document.getElementById("myDropdown").classList.toggle("show");
+ 
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+function myFunction() {
+        // addr_search();
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+
+      // kuala lumpur
+      var startlat = 3.1390;
+      var startlon = 101.6869;
+
+      var options = {
+        center: [startlat, startlon],
+        zoom: 12,
+      };
+
+      document.getElementById("lat").value = startlat;
+      document.getElementById("lon").value = startlon;
+
+      var map = L.map("map", options);
+      
+      var nzoom = 13;
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                minZoom: 0,
+                maxZoom: 40,
+                attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+
+            //set the boundary to the view
+             console.log(map.getBounds().getSouthWest().toString());
+             console.log(map.getBounds().getNorthEast().toString());
+             map.setMaxBounds(map.getBounds());
+            ;
+            const leafletMarkers = L.layerGroup([
+                new L.marker([3.2140, 101.6356]),
+                new L.marker([3.1917, 101.6734]),
+                new L.marker([3.1705, 101.6905]),
+                new L.marker([3.2038, 101.7367]),
+                new L.marker([3.1830, 101.7462]),
+                new L.marker([3.177539, 101.664505]),
+                new L.marker([3.1068, 101.7259]),
+                new L.marker([3.0920, 101.7211]),
+                new L.marker([3.1134, 101.6816]),
+                new L.marker([3.219850, 101.641300]),
+                new L.marker([3.20215983,101.67105934])
+            ]);
+            leafletMarkers.addTo(map);
+    
+
+      L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+        attribution: "OSM",
+      }).addTo(map);
+      L.control.scale().addTo(map);
+//auto movement of map location
+
+// setInterval(function(){
+//     map.setView([3.1390, 101.6869]);
+//     map.setZoom(11);
+//     setTimeout(function(){
+//         map.setView([3.2140, 101.6356]);
+//         map.setZoom(9);
+//     }, 2000);
+   
+// }, 4000);
+// setInterval(function(){
+//     map.setZoom(9);
+//     setTimeout(function(){
+//         map.setZoom(11);
+   
+//     }, 2000);
+// },4000 );
+      var myMarker = L.marker([startlat, startlon], {
+        title: "Coordinates",
+        alt: "Coordinates",
+        draggable: true,
+      })
+        .addTo(map)
+        .on("dragend", function () {
+          var lat = myMarker.getLatLng().lat.toFixed(8);
+          var lon = myMarker.getLatLng().lng.toFixed(8);
+          var czoom = map.getZoom();
+          if (czoom < 18) {
+            nzoom = czoom + 2;
+          }
+          if (nzoom > 18) {
+            nzoom = 18;
+          }
+          if (czoom != 18) {
+            map.setView([lat, lon], nzoom);
+          } else {
+            map.setView([lat, lon]);
+          }
+          document.getElementById("lat").value = lat;
+          document.getElementById("lon").value = lon;
+          myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
+        });
+
+      function chooseAddr(arr) {
+        console.log(arr);
+
+        var lat1 = arr.latitude;
+        var lng1 = arr.longitude;
+
+        myMarker.closePopup();
+        map.setView([lat1, lng1], 16);
+        myMarker.setLatLng([lat1, lng1]);
+        lat = lat1.toFixed(8);
+        lon = lng1.toFixed(8);
+        document.getElementById("lat").value = lat;
+        document.getElementById("lon").value = lon;
+        myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
+        arrData =JSON.stringify(arr);
+
+        //  console.log(reg, c_code, locality)
+        
+        // var sub_search =
+        //   "Location:<br><input type='text' id='subsearch1'><button onclick='subsearch(" +
+        //   JSON.stringify(arr) +
+        // //   ");return false;'>Search</button>";
+          
+        // document.getElementById("results2").innerHTML = sub_search;
+        
+        if (arr.country_code == "MYS") {
+          $.getJSON("/static/geojson/malaysia.geojson", function (hoodData) {
+            L.geoJson(hoodData).addTo(map);
+          });
+        } else if (arr.country_code == "IND") {
+          $.getJSON("/static/geojson/india_state.geojson", function (hoodData) {
+            L.geoJson(hoodData).addTo(map);
+          });
+        }
+      }
+
+      function chooseSubAddress(arr) {
+        var lat1 = arr.latitude;
+        var lng1 = arr.longitude;
+
+        myMarker.closePopup();
+        map.setView([lat1, lng1], 16);
+       
+        myMarker.setLatLng([lat1, lng1]);
+        lat = lat1.toFixed(8);
+        lon = lng1.toFixed(8);
+        document.getElementById("lat").value = lat;
+        document.getElementById("lon").value = lon;
+        locality1=arr.name
+        // getAddress(lat, lon).then(console.log).catch(console.error);
+        myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
+
+        if (arr.region_code == "KUL") {
+          $.getJSON(
+            // "/static/geojson/kuala_lumpur.geojson",
+            function (hoodData) {
+              L.geoJson(hoodData).addTo(map);
+            
+            }
+          );
+        }
+      }
+//sub search area ...............................
+      function subsearch(arr) {
+        $('subsearch').append( $('dropdown') );
+        myFunction();
+   
+        var parent_add = $("#addr").val();
+        var search = $("#subsearch").val();
+
+        var result = "";
+        var xmlhttp = new XMLHttpRequest();
+        var url =
+          "http://api.positionstack.com/v1/forward?access_key=72c76ad8082ee9e135c2834394c63dfa&query=" +
+          search;
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            console.log("subsearch result Search: ", myArr.data[0].locality);
+            locality=myArr.data[0].locality;
+            venue = myArr.data[0].type;
+            document.getElementById('results').style.display = 'hidden';
+            // getAddress(myArr.latitude, myArr.longitude).then(console.log).catch(console.error);
+          
+            getResult(myArr.data);
+            if(locality.toUpperCase()!== parent_add.toUpperCase() && venue.toUpperCase() !==parent_add.toUpperCase() )
+            {
+           alert("please search a location inside selected parliament");
+           document.getElementById("results").innerHTML = "";
+           document.getElementById('results2').innerHML = "";
+           document.getElementById('results3').innerHTML= "";
+           document.getElementById('subsearch').innerHTML= "";
+        
+            }
+          else 
+            {
+          result="1";
+        myMarker.closePopup();
+        map.setView([myArr.data.latitude,myArr.data.longitude], 13);
+        myMarker.setLatLng([myArr.data.latitude, myArr.data.latitude]);
+        lat = myArr.data.latitude.toFixed(8);
+        lon = myArr.data.latitude.toFixed(8);
+        if (arr.region_code == "KUL") {
+          $.getJSON(
+            "/static/geojson/kuala_lumpur.geojson",
+            function (hoodData) {
+              L.geoJson(hoodData).addTo(map);
+            }
+          );
+        }
+    }
+
+          }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+        var parent_add = $("#addr").val();
+        console.log(parent_add+"and"+locality);
+                var reg = arr.region;
+        var c_code = arr.country_code;
+        var locality = arr.locality;
+        var type = arr.type;
+        var county = arr.county;
+        console.log(c_code, reg, locality);
+        var data = get_coordinate(search);
+        var arr = data.data;
+        console.log("sample", data.data);
+       
+        if (type == "county" && reg != null) {
+          console.log("enter into", county);
+          console.log(result);
+          result = arr.filter(function (item) {
+            return item.county == county && item.region == reg;
+          });
+          console.log(
+            "countything",
+            arr.filter(function (item) {
+              return item.county == county && item.region == reg;
+            })
+          );
+          console.log("____________");
+        } else if (locality != null) {
+          console.log("locality not null");
+          result = arr.filter(function (item) {
+            return (
+              item.country_code == c_code &&
+              item.region == reg &&
+              item.county == locality
+            );
+          });
+          console.log(
+            arr.filter(function (item) {
+              return (
+                item.country_code == c_code &&
+                item.region == reg &&
+                item.locality == locality
+              );
+            })
+          );
+        } else if (reg != null) {
+          console.log("region not null");
+          result = arr.filter(function (item) {
+            return item.country_code == c_code && item.region == reg;
+          });
+          console.log(
+            arr.filter(function (item) {
+              return item.country_code == c_code && item.region == reg;
+            })
+          );
+        } else {
+          console.log("else part");
+          result = arr.filter(function (item) {
+            return item.country_code == c_code;
+          });
+          console.log(
+            arr.filter(function (item) {
+              return item.country_code == c_code;
+            })
+          );
+        }
+        console.log("*************");
+        console.log("result", result);
+        // if (result.length == 0) {
+        //   alert("Please searh inside region");
+        // } else {
+        //   drawmap(result[0]);
+        //   getResult4(result);
+        //   // $("#result2").html("")
+        // }
+      }
+
+      function getResult4(arr) {
+        var out = "<br />";
+        var i;
+        if (arr.length > 0) {
+          $(".res2").show();
+          for (i = 0; i < arr.length; i++) {
+            data = JSON.stringify(arr[i]);
+            out +=
+              "<div class='address' title='Show Location and Coordinates' onclick='chooseSubAddress(" +
+              data +
+              ");return false;'>" +
+              arr[i].label +
+              "</div>";
+          }
+          document.getElementById("results3").innerHTML = out;
+        } else {
+          document.getElementById("results3").innerHTML =
+            "Sorry, no results...";
+        }
+      }
+
+      function drawmap(arr) {
+        var lat1 = arr.latitude;
+        var lng1 = arr.longitude;
+
+        myMarker.closePopup();
+        map.setView([lat1, lng1], 14);
+        myMarker.setLatLng([lat1, lng1]);
+        lat = lat1.toFixed(8);
+        lon = lng1.toFixed(8);
+        document.getElementById("lat").value = lat;
+        document.getElementById("lon").value = lon;
+        // getAddress(lat, lon).then(console.log).catch(console.error);
+        myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
+        if (arr.region_code == "KUL") {
+          $.getJSON(
+            "/static/geojson/kuala_lumpur.geojson",
+            function (hoodData) {
+              L.geoJson(hoodData).addTo(map);
+            }
+          );
+        }
+      }
+
+      function getResult(arr) {
+        var parent_add = $("#addr").val();
+        var out = "<br />";
+        var i;
+        if (arr.length > 0) {
+          for (i = 0; i < arr.length; i++) {
+            var data = JSON.stringify(arr[i]);
+            out +=
+              "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" +
+              data +
+              ");return false;'>" +
+              arr[i].label +
+              "</div>";
+          }
+          console.log("data from getresult method")
+          document.getElementById("results").innerHTML = out;
+        } else {
+          document.getElementById("results").innerHTML = "Sorry, no results...";
+        }
+      }
+
+      function addr_search() {
+   
+        myFunction();
+        document.getElementById('results').style.display = 'visible';
+        
+           document.getElementById('results2').style.display = 'visible';
+           document.getElementById('results3').style.display = 'visible';
+       
+        var inp = document.getElementById("addr");
+        var xmlhttp = new XMLHttpRequest();
+        var url =
+          "http://api.positionstack.com/v1/forward?access_key=72c76ad8082ee9e135c2834394c63dfa&query=" +
+          inp.value;
+        xmlhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            var myArr = JSON.parse(this.responseText);
+            console.log("2nd Search: ", myArr.data);
+            getResult(myArr.data);
+          }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+      }
+
+      function sub_search() {
+        var parent_search = $("#addr").val();
+        var searchValue = $("#subSearch").val();
+        // console.log(searchValue);
+        var res = get_coordinate(parent_search);
+        var res2 = get_coordinate(searchValue);
+
+        console.log("res", res);
+        console.log("res2", res2);
+        for (i = 0; i < res.data.length; i++) {
+          var c_code = res.data[i].country_code;
+          var region = res.data[i].region;
+          var locality = res.data[i].locality;
+          var type = res.data[i].type;
+          for (j = 0; j < res2.data.length; j++) {
+            var c_code2 = res2.data[j].country_code;
+            var region2 = res2.data[i].region;
+            var locality2 = res2.data[i].locality;
+            var type2 = res2.data[i].type;
+
+            if (type == "country") {
+              if (c_code == c_code2) {
+                console.log("Country Matching");
+                getResult2(1, res2.data[j]);
+              } else {
+              }
+            } else if (type == "region") {
+              if (c_code == c_code2) {
+                console.log(region, region2);
+                if (region == region2) {
+                  console.log("Region matching");
+                  getResult2(1, res2.data[j]);
+                } else {
+                  getResult2(2, "nothing Matching");
+                }
+              }
+            } else if (type == "locality") {
+              if (locality == locality2) {
+                console.log("locality matching");
+                getResult2(1, res2.data[j]);
+              }
+            } else if (type == "neighbourhood") {
+            } else {
+              getResult2(2, "nothing Matching");
+              console.log("nothing Matching");
+            }
+          }
+        }
+      }
+
+      function get_coordinate(addr) {
+        var result = "";
+        $.ajax({
+          url:
+            "http://api.positionstack.com/v1/forward?access_key=72c76ad8082ee9e135c2834394c63dfa&query=" +
+            addr,
+          async: false,
+          success: function (data) {
+            result = data;
+          },
+        });
+        return result;
+      }
+
+      function getResult2(step, arr) {
+        if (step == 1) {
+          var out = "<br />";
+          var i;
+          out +=
+            "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" +
+            arr.latitude +
+            ", " +
+            arr.longitude +
+            ");return false;'>" +
+            arr.label +
+            "</div>";
+            console.log("daa from getresult function"+out);
+          document.getElementById("results2").innerHTML = out;
+        } else {
+          document.getElementById("results2").innerHTML = "NOT Matching";
+        }
+      }
+ 
+
+      var zoom = 16;
+
+      // var markers = new OpenLayers.Layer.Markers("Markers");
+      // map.addLayer(markers);
+
+      // markers.addMarker(new OpenLayers.Marker(lonLat));
+
+      // map.setCenter(lonLat, zoom);
+
+
+
+//       function getAddress (latitude, longitude) {
+//     return new Promise(function (resolve, reject) {
+//         var request = new XMLHttpRequest();
+
+//         var method = 'GET';
+//         var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
+//         var async = true;
+
+//         request.open(method, url, async);
+//         request.onreadystatechange = function () {
+//             if (request.readyState == 4) {
+//                 if (request.status == 200) {
+//                     var data = JSON.parse(request.responseText);
+//                     var address = data.results[0];
+//                     resolve(address);
+//                 }
+//                 else {
+//                     reject(request.status);
+//                 }
+//             }
+//         };
+//         request.send();
+//     });
+// };
+
+    </script>
+  </body>
+</html>

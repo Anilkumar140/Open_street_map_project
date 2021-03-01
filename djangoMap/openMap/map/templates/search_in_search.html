@@ -12,7 +12,28 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/duotone.css" integrity="sha384-R3QzTxyukP03CMqKFe0ssp5wUvBPEyy9ZspCB+Y01fEjhMwcXixTyeot+S40+AjZ" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous"/>
+    <!-- Load Leaflet from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
 
+<!-- Load Esri Leaflet from CDN -->
+<script src="https://unpkg.com/esri-leaflet@2.5.3/dist/esri-leaflet.js"
+  integrity="sha512-K0Vddb4QdnVOAuPJBHkgrua+/A9Moyv8AQEWi0xndQ+fqbRfAFd47z4A9u1AW/spLO0gEaiE1z98PK1gl5mC5Q=="
+  crossorigin=""></script>
+
+<!-- Load Esri Leaflet Geocoder from CDN -->
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.css"
+  integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+  crossorigin="">
+<script src="https://unpkg.com/esri-leaflet-geocoder@2.3.3/dist/esri-leaflet-geocoder.js"
+  integrity="sha512-HrFUyCEtIpxZloTgEKKMq4RFYhxjJkCiF5sDxuAokklOeZ68U2NPfh4MFtyIVWlsKtVbK5GD2/JzFyAfvT5ejA=="
+  crossorigin=""></script>
+
+  <script type="text/javascript" src="../static/geojson/cordinates.json "> </script>
     <style type="text/css">
       html,
       body {
@@ -48,24 +69,25 @@
         float: left;
         width: 20%;
         padding: 10px;
-        height: 4--px; /* Should be removed. Only for demonstration */
+        height: 700px; /* Should be removed. Only for demonstration */
         background-image: url("https://www.maxpixel.net/static/photo/1x/Background-Pattern-Arrangement-Texture-Diamonds-641909.jpg");
       }
       .column1 {
         float: left;
-        width: 24%;
+        width: 30%;
         padding: 10px;
         height: 700px; /* Should be removed. Only for demonstration */
       }
       .column2 {
         float: left;
         width: 50%;
-        padding: 10px;
+        padding: 15px;
         height: 700px; 
        /* Should be removed. Only for demonstration */
       }
       .div1 {
   padding: 39px;
+  height: 100px; 
 
 }
 #img1{
@@ -81,12 +103,7 @@ select {
     -moz-padding-end: 20px;
     -webkit-padding-start: 2px;
     -moz-padding-start: 2px;
-    background-color: #F07575; /* Fallback color if gradients are not supported */
-    background-image: url(../images/select-arrow.png), -webkit-linear-gradient(top, #E5E5E5, #F4F4F4); /* For Chrome and Safari */
-    background-image: url(../images/select-arrow.png), -moz-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Firefox (3.6 to 16) */
-    background-image: url(../images/select-arrow.png), -ms-linear-gradient(top, #E5E5E5, #F4F4F4); /* For pre-releases of Internet Explorer  10*/
-    background-image: url(../images/select-arrow.png), -o-linear-gradient(top, #E5E5E5, #F4F4F4); /* For old Opera (11.1 to 12.0) */
-    background-image: url(../images/select-arrow.png), linear-gradient(to bottom, #E5E5E5, #F4F4F4); /* Standard syntax; must be last */
+   /* Standard syntax; must be last */
     background-position: center right;
     background-repeat: no-repeat;
     border: 1px solid #AAA;
@@ -101,6 +118,138 @@ select {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.dropbtn {
+  background-color:gray;
+  color: white;
+
+  border: none;
+  cursor: pointer;
+height:23px;
+width:27px;
+}
+.dropbtn1{
+  background-color:gray;
+  color: white;
+
+  border: none;
+  cursor: pointer;
+height:23px;
+width:27px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: unset;
+  background-color: #f1f1f1;
+  min-width: 0px;
+  box-shadow: 0px 8px px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content div{
+  color: black;
+  padding: 12px px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content div:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+.geocoder {
+position: absolute;
+z-index: 1;
+width: 50%;
+left: 50%;
+margin-left: -25%;
+top: 10px;
+}
+/* .mapboxgl-ctrl-geocoder {
+min-width: 100%;
+} */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* html {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 100%;
+  background: #333;
+  -webkit-font-smoothing: antialiased;
+} */
+
+#page-wrapper {
+  width: 600px;
+  background: #FFFFFF;
+  padding: 1em;
+  margin: 1em auto;
+  border-top: 5px solid #69c773;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+h1 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  color: #999999;
+}
+
+input {
+  width: 100%;
+  height: 30px;
+  padding: 0.5em 0.5em;
+  font-size: 1.2em;
+  border-radius: 10px;
+  border: 1px solid #D9D9D9;
+}
+
+button {
+  display: inline-block;
+  border-radius: 3px;
+  border: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8em;
+  background: #69c773;
+  border-bottom: 1px solid #498b50;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  font-weight: bold;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+button:hover, button:focus {
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 1;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1) inset;
+}
+
 
 
     </style>
@@ -118,19 +267,19 @@ select {
             <br />
             <br />
             <br />
-            main page
+            Main page
             <br />
             <br />
-            list of service areas
+            List of service areas
             <br />
             <br />
-            cleaning & collection activity schedule
+            Cleaning & collection activity schedule
             <br />
             <br />
-            application and review of PPSPPA applications
+            Application and review of PPSPPA applications
             <br>
             <br>
-            public complaint
+            Public complaint
 
           </font>
           
@@ -142,11 +291,11 @@ Frequently asked &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;questions
 <br>
 <br>
 <i class="fa fa-phone" aria-hidden="true"></i>
-contact us
+Contact us
 <br>
 <br>
 <i class="fa fa-users" aria-hidden="true"></i>
-number of visitors
+Number of visitors
 </font>
 </div>
 
@@ -157,68 +306,244 @@ number of visitors
       <div class="column1" style="background-color: white">
         <h2>list of service areas</h2>
         <form>
-          <input type="text" name="lat" id="lat" size="12" value="" />
-          <input type="text" name="lon" id="lon" size="12" value="" />
+          <input type="text" hidden name="lat" id="lat" size="12" value="" />
+          <input type="text" hidden name="lon" id="lon" size="12" value="" />
         </form>
         Parliament:
         <div id="search">
           <!-- id="addr" -->
-          <select id="addr" style="width:80%;">
+          <!-- <select id="addr" style="width:80%;" onchange="schedule(this.value)">
             <option value="batu">batu</option>
             <option value="Kepong">kepong</option>
             <option value="segambut">segambut</option>
             <option value="titiwangsa">titiwangsa</option>
             <option value="wangsa maju">wangsa maju</option>
             <option value="setiawangsa">setiawangsa</option>
-            <option value="bukit">bukit</option>
-            <option value="bintang">bintang</option>
+            <option value="bukit">bukit bintang </option>
             <option value="lemah pantai">lemah pantai</option>  
             <option value="cheras">cheras</option>
             <option value="bandar tun razak">bandar tun razak</option>
             <option value="seputeh">seputeh</option>
-            <option value="bhubaneswar">bhubaneswar</option>
-          </select>
+         
+          </select> -->
+          <input type="text" id="ajax1" list="json-datalist1" placeholder="e.g. datalist">
+  
+          <datalist id="json-datalist1" ></datalist>
+          <!-- <input type="text" id="ajax" list="json-datalist" placeholder="e.g. datalist">
+          <datalist id="json-datalist"></datalist> -->
           <!-- <br />
         </br> -->
+       
           <!-- <input type="text" name="addr" value="" id="addr" style="width:80%;" size="58" /> -->
-          <button type="button" onclick="addr_search();"><i class="fa fa-search" aria-hidden="true"></i></button>
+          <!-- <div class="dropdown">
+            <button class="dropbtn" onclick="addr_search();"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <div id="myDropdown" class="dropdown-content">
+              <div id="results3"></div>
+              <div id="results"></div>
+             
+            </div>
+          </div> -->
+          <br>
+          <br>
+          Location:
+          <br>
+          <input type="text" id="ajax2" list="json-datalist2" placeholder="Search the location">
+  
+          <datalist id="json-datalist2" ></datalist>
+          <br>
+          <br>
+         
+          <!-- <input type='text' id='subsearch' >
+         
+          <div class="dropdown">
+            <button class="dropbtn fa fa-search" onclick='subsearch(arrData 
+          
+            );return false;'></button>
+           
+            <div id="myDropdown" class="dropdown-content">
+              <div id="results3"></div>
+              <div id="results"></div>
+          
+            </div>
+          </div> -->
+         
+            </div>
+          </div>
+          <!-- <button type="button" onclick="addr_search();"><i class="fa fa-search" aria-hidden="true"></i></button> -->
           <br>
           <!-- Location: -->
         </div>
-        <div class="container">
-            <div id="results"></div>
-            <hr />
-            <div id="results2"></div>
-            <hr />
-            <div id="results3"></div>
-            </div>
+       
+         <div class="container">
+          <div id="results2"></div> 
+            </div> 
       </div>
       <div class="column2" style="background-color:white;" >
-       <h4 style="text-align: right; margin-top: 3px;">Search The List Of Service Area</h4>
-          <div style="width: 100%; height: 80%; margin-bottom: 165px; margin-top: 2px;" id="map"></div>
+      
+          <div style="width: 100%; height: 100%; margin-bottom: 170  px; margin-top: 2px;" id="map"></div>
       </div>
     </div>
+    <!-- <input type="text" list="hosting-plan" /> -->
+    <!-- <datalist id="hosting-plan"></datalist> -->
     
     <script type="text/javascript">
 
-    var locality;
+  var arrData;
+  var locality;
+  var locality1;
+  var lat;
+  var lon;
+  var dataarray =[];
+  var values1;
+  var  values;
+//   function clear(){
+//   document.getElementById("ajax1").innerHTML = "";
+//   document.getElementById("ajax2").innerHTML = "";
+//   console.log("hey Anil");
+
+// }
+  document.getElementById('lat').style.display = 'hidden';
+  function getBoundsFromLatLng(lat, lng, radiusInKm){
+     var lat_change = radiusInKm/111.2;
+     var lon_change = Math.abs(Math.cos(lat*(Math.PI/180)));
+     var bounds = { 
+         lat_min : lat - lat_change,
+         lon_min : lng - lon_change,
+         lat_max : lat + lat_change,
+         lon_max : lng + lon_change
+     };
+     return bounds;
+}
+//   function readTextFile(file, callback) {
+//     var rawFile = new XMLHttpRequest();
+//     rawFile.overrideMimeType("application/json");
+//     rawFile.open("GET", file, true);
+//     rawFile.onreadystatechange = function() {
+//         if (rawFile.readyState === 4 && rawFile.status == "200") {
+//             callback(rawFile.responseText);
+//         }
+//     }
+//     rawFile.send(null);
+// }
+
+// //usage:
+// readTextFile("/static/geojson/mapdata.json", function(text){
+//     var data = JSON.parse(text);
+//     console.log(JSON.parse(text));
+
+    
+// });
+// alert(mydata[0].lat);
+// alert(mydata[0].lon);
+//catch 
+$(document).on('change', 'input', function(){
+    var options = $('#json-datalist1')[0].options;
+    var val = $(this).val();
+    for (var i=0;i<options.length;i++){
+       if (options[i].value === val) {
+         console.log(val);
+      
+        parentCall();
+        // schedule(val);
+       
+
+          break;
+       }
+    }
+});
+$(document).on('change', 'input', function(){
+    var options = $('#json-datalist2')[0].options;
+    var val = $(this).val();
+    for (var i=0;i<options.length;i++){
+       if (options[i].value === val) {
+        var arrayin =[];
+         console.log(val);
+
+         var arrayin= val.split(',');
+         console.log(arrayin[2]+"....AND....."+arrayin[3]);
+         myMarker.closePopup();
+  latitute4 = arrayin[2];
+  longitute4 = arrayin[3];
+        map.setView([ latitute4,longitute4] , 17);
+        myMarker.setLatLng([ latitute4,longitute4]);
+        // lat =latitute4.toFixed(8);
+        // lon = latitute4.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute4 + "<br />Lon " + longitute4).openPopup();
+   
+        // schedule(val);
+          break;
+       }
+    }
+});
     $(document).ready(function () {
+   
         $(".leaflet-pane .leaflet-marker-pane img").attr(
           "src",
-          "http://localhost:8000/static/img/marker.gif"
+          "http://localhost:8000/static/img/marker.png"
         );
         $(".leaflet-pane .leaflet-marker-pane img").css("height", "50px");
         $(".leaflet-pane .leaflet-marker-pane img").css("width", "40px");
+
+   
       });
-    
-           
+     
+      $.getJSON(
+            // "/static/geoJson/kuala_lumpur1.geojson",
+            "/static/geoJson/kuala_lumpur1.geojson",
+            function (hoodData) {
+              L.geoJson(hoodData,{color: 'red', opacity:0.7 , weight:2}).addTo(map);
+            
+            }
+          );
+
+        
+      function myFunction() {
+        // addr_search();
+  document.getElementById("myDropdown").classList.toggle("show");
+ 
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+function myFunction() {
+        // addr_search();
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+} 
+
       // kuala lumpur
       var startlat = 3.1390;
       var startlon = 101.6869;
 
       var options = {
         center: [startlat, startlon],
-        zoom: 11,
+        zoom: 12,
       };
 
       document.getElementById("lat").value = startlat;
@@ -234,11 +559,11 @@ number of visitors
             }).addTo(map);
 
 
-            //set the boundary to the view
+            // //set the boundary to the view
              console.log(map.getBounds().getSouthWest().toString());
              console.log(map.getBounds().getNorthEast().toString());
-             map.setMaxBounds(map.getBounds());
-
+            //  map.setMaxBounds(map.getBounds());
+            // ;
             const leafletMarkers = L.layerGroup([
                 new L.marker([3.2140, 101.6356]),
                 new L.marker([3.1917, 101.6734]),
@@ -248,13 +573,13 @@ number of visitors
                 new L.marker([3.177539, 101.664505]),
                 new L.marker([3.1068, 101.7259]),
                 new L.marker([3.0920, 101.7211]),
-                new L.marker([3.1134, 101.6816]),
-                new L.marker([3.219850, 101.641300])
+                new L.marker([3.1134, 101.68]),
+                new L.marker([3.219850, 101.641300]),
+                new L.marker([3.20215983,101.67105934]),
+          
             ]);
             leafletMarkers.addTo(map);
     
-      
-      
 
       L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
         attribution: "OSM",
@@ -301,7 +626,7 @@ number of visitors
           }
           document.getElementById("lat").value = lat;
           document.getElementById("lon").value = lon;
-          myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+          myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
         });
 
       function chooseAddr(arr) {
@@ -311,28 +636,33 @@ number of visitors
         var lng1 = arr.longitude;
 
         myMarker.closePopup();
-        map.setView([lat1, lng1], 16);
+        map.setView([lat1, lng1], 14);
         myMarker.setLatLng([lat1, lng1]);
         lat = lat1.toFixed(8);
         lon = lng1.toFixed(8);
         document.getElementById("lat").value = lat;
         document.getElementById("lon").value = lon;
-        myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+        myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
+        arrData =JSON.stringify(arr);
+
         //  console.log(reg, c_code, locality)
-        var sub_search =
-          "Location:<br><input type='text' id='subsearch'><button onclick='subsearch(" +
-          JSON.stringify(arr) +
-          ");return false;'>Search</button>";
-        document.getElementById("results2").innerHTML = sub_search;
-        if (arr.country_code == "MYS") {
-          $.getJSON("/static/geojson/malaysia.geojson", function (hoodData) {
-            L.geoJson(hoodData).addTo(map);
-          });
-        } else if (arr.country_code == "IND") {
-          $.getJSON("/static/geojson/india_state.geojson", function (hoodData) {
-            L.geoJson(hoodData).addTo(map);
-          });
-        }
+        
+        // var sub_search 
+        //   "Location:<br><input type='text' id='subsearch1'><button onclick='subsearch(" +
+        //   JSON.stringify(arr) +
+        // //   ");return false;'>Search</button>";
+          
+        // document.getElementById("results2").innerHTML = sub_search;
+        
+        // if (arr.country_code == "MYS") {
+        //   $.getJSON("/static/geojson/malaysia.geojson", function (hoodData) {
+        //     L.geoJson(hoodData).addTo(map);
+        //   });
+        // } else if (arr.country_code == "IND") {
+        //   $.getJSON("/static/geojson/india_state.geojson", function (hoodData) {
+        //     L.geoJson(hoodData).addTo(map);
+        //   });
+        // }
       }
 
       function chooseSubAddress(arr) {
@@ -340,17 +670,20 @@ number of visitors
         var lng1 = arr.longitude;
 
         myMarker.closePopup();
-        map.setView([lat1, lng1], 16);
+        map.setView([lat1, lng1], 14);
        
         myMarker.setLatLng([lat1, lng1]);
         lat = lat1.toFixed(8);
         lon = lng1.toFixed(8);
         document.getElementById("lat").value = lat;
         document.getElementById("lon").value = lon;
-        myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+        locality1=arr.name
+        // getAddress(lat, lon).then(console.log).catch(console.error);
+        myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
+
         if (arr.region_code == "KUL") {
           $.getJSON(
-            // "/static/geojson/kuala_lumpur.geojson",
+            "/static/geoJson/kuala_lumpur1.geojson",
             function (hoodData) {
               L.geoJson(hoodData).addTo(map);
             
@@ -360,8 +693,12 @@ number of visitors
       }
 //sub search area ...............................
       function subsearch(arr) {
+      console.log("datya brecive d frpomthe subse5rach"+arr);
+        myFunction();
+   
         var parent_add = $("#addr").val();
         var search = $("#subsearch").val();
+
         var result = "";
         var xmlhttp = new XMLHttpRequest();
         var url =
@@ -370,11 +707,15 @@ number of visitors
         xmlhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             var myArr = JSON.parse(this.responseText);
-            console.log("subsearch result Search: ", myArr.data[0].locality);
-            locality=myArr.data[0].locality;
-            venue = myArr.data[0].type;
-
-          
+            for (i=0 ; i< myArr.data.length; i++ ){
+                          
+            console.log("subsearch result Search: ", myArr.data[i].locality);
+                        }
+            // locality=myArr.data[0].locality;
+            // venue = myArr.data[0].type;
+            // document.getElementById('results').style.display = 'hidden';
+            // getAddress(myArr.latitude, myArr.longitude).then(console.log).catch(console.error);
+          console.log("my array is"+arr);
             getResult(myArr.data);
             if(locality.toUpperCase()!== parent_add.toUpperCase() && venue.toUpperCase() !==parent_add.toUpperCase() )
             {
@@ -393,15 +734,8 @@ number of visitors
         myMarker.setLatLng([myArr.data.latitude, myArr.data.latitude]);
         lat = myArr.data.latitude.toFixed(8);
         lon = myArr.data.latitude.toFixed(8);
-        if (arr.region_code == "KUL") {
-          $.getJSON(
-            "/static/geojson/kuala_lumpur.geojson",
-            function (hoodData) {
-              L.geoJson(hoodData).addTo(map);
-            }
-          );
-        }
-            }
+      
+    }
 
           }
         };
@@ -514,10 +848,11 @@ number of visitors
         lon = lng1.toFixed(8);
         document.getElementById("lat").value = lat;
         document.getElementById("lon").value = lon;
-        myMarker.bindPopup("Lat " + lat + "<br />Lon " + lon).openPopup();
+        // getAddress(lat, lon).then(console.log).catch(console.error);
+        myMarker.bindPopup("<br/>Lat " + lat + "<br />Lon " + lon).openPopup();
         if (arr.region_code == "KUL") {
           $.getJSON(
-            "/static/geojson/kuala_lumpur.geojson",
+            "/static/geoJson/kuala_lumpur1.geojson",
             function (hoodData) {
               L.geoJson(hoodData).addTo(map);
             }
@@ -531,6 +866,7 @@ number of visitors
         var i;
         if (arr.length > 0) {
           for (i = 0; i < arr.length; i++) {
+         console.log(arr[i].label)
             var data = JSON.stringify(arr[i]);
             out +=
               "<div class='address' title='Show Location and Coordinates' onclick='chooseAddr(" +
@@ -539,6 +875,7 @@ number of visitors
               arr[i].label +
               "</div>";
           }
+          console.log("data from getresult method")
           document.getElementById("results").innerHTML = out;
         } else {
           document.getElementById("results").innerHTML = "Sorry, no results...";
@@ -546,9 +883,13 @@ number of visitors
       }
 
       function addr_search() {
+
+        // myFunction();
         document.getElementById('results').style.display = 'visible';
+        
            document.getElementById('results2').style.display = 'visible';
            document.getElementById('results3').style.display = 'visible';
+       
         var inp = document.getElementById("addr");
         var xmlhttp = new XMLHttpRequest();
         var url =
@@ -641,27 +982,357 @@ number of visitors
             ");return false;'>" +
             arr.label +
             "</div>";
+            console.log("daa from getresult function"+out);
           document.getElementById("results2").innerHTML = out;
         } else {
           document.getElementById("results2").innerHTML = "NOT Matching";
         }
       }
-      map = new OpenLayers.Map("mapdiv");
-      map.addLayer(new OpenLayers.Layer.OSM());
+ 
 
-      var lonLat = new OpenLayers.LonLat(101.6869, 3.139).transform(
-        new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-        map.getProjectionObject() // to Spherical Mercator Projection
-      );
+      var zoom = 14;
 
-      var zoom = 16;
+      // var markers = new OpenLayers.Layer.Markers("Markers");
+      // map.addLayer(markers);
 
-      var markers = new OpenLayers.Layer.Markers("Markers");
-      map.addLayer(markers);
+      // markers.addMarker(new OpenLayers.Marker(lonLat));
 
-      markers.addMarker(new OpenLayers.Marker(lonLat));
+      // map.setCenter(lonLat, zoom);
 
-      map.setCenter(lonLat, zoom);
+
+
+//       function getAddress (latitude, longitude) {
+//     return new Promise(function (resolve, reject) {
+//         var request = new XMLHttpRequest();
+
+//         var method = 'GET';
+//         var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitude + ',' + longitude + '&sensor=true';
+//         var async = true;
+
+//         request.open(method, url, async);
+//         request.onreadystatechange = function () {
+//             if (request.readyState == 4) {
+//                 if (request.status == 200) {
+//                     var data = JSON.parse(request.responseText);
+//                     var address = data.results[0];
+//                     resolve(address);
+//                 }
+//                 else {
+//                     reject(request.status);
+//                 }
+//             }
+//         };
+//         request.send();
+//     });
+// };
+
+// L.esri.basemapLayer('Imagery').addTo(map);
+//   L.esri.basemapLayer('ImageryLabels').addTo(map);
+var searchControl = L.esri.Geocoding.geosearch().addTo(map);
+
+var results = L.layerGroup().addTo(map);
+
+searchControl.on("results", function (data) {
+  console.log(data);
+  results.clearLayers();
+  for (var i = data.results.length - 1; i >= 0; i--) {
+   
+    results.addLayer(L.marker(data.results[i].latlng));
+
+
+}
+});
+
+function schedule(selectedValue){
+
+   console.log(selectedValue)
+   if(selectedValue == "kepong"){
+    myMarker.closePopup();
+  latitute1 = 3.21473900;
+  longitute1 = 101.63761000;
+        map.setView([3.21473900,101.63761000], 17);
+        myMarker.setLatLng([3.21473900,101.63761000]);
+        lat =latitute1.toFixed(8);
+        lon = latitute1.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute1 + "<br />Lon " + longitute1).openPopup();
+   }
+  else  if(selectedValue == "segambut"){
+    myMarker.closePopup();
+  latitute2 = 3.18333;
+  longitute2 = 101.65;
+        map.setView([ latitute2,longitute2] , 17);
+        myMarker.setLatLng([ latitute2,longitute2 ]);
+        lat =latitute2.toFixed(8);
+        lon = latitute2.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute2 + "<br />Lon " + longitute2).openPopup();
+   }
+   else  if(selectedValue == "titiwangsa"){
+    myMarker.closePopup();
+  latitute3 = 3.178657;
+  longitute3 = 101.704403;
+        map.setView([ latitute3,longitute3] , 17);
+        myMarker.setLatLng([ latitute3,longitute3]);
+        lat =latitute3.toFixed(8);
+        lon = latitute3.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute3 + "<br />Lon " + longitute3).openPopup();
+   }
+   else  if(selectedValue == "wangsa maju"){
+    myMarker.closePopup();
+  latitute4 = 3.2038;
+  longitute4 = 101.7367;
+        map.setView([ latitute4,longitute4] , 17);
+        myMarker.setLatLng([ latitute4,longitute4]);
+        lat =latitute4.toFixed(8);
+        lon = latitute4.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute4 + "<br />Lon " + longitute4).openPopup();
+   }
+   else  if(selectedValue == "setiawangsa"){
+    myMarker.closePopup();
+  latitute5 = 3.1830;
+  longitute5 = 101.7462;
+        map.setView([ latitute5,longitute5] , 17);
+        myMarker.setLatLng([ latitute5,longitute5]);
+        lat =latitute5.toFixed(8);
+        lon = latitute5.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute5 + "<br />Lon " + longitute5).openPopup();
+   }
+   else  if(selectedValue == "bukit"){
+    myMarker.closePopup();
+  latitute6 = 3.146708;
+  longitute6 =101.711197;
+        map.setView([ latitute6,longitute6] , 17);
+        myMarker.setLatLng([ latitute6,longitute6]);
+        lat =latitute6.toFixed(8);
+        lon = latitute6.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute6 + "<br />Lon " + longitute6).openPopup();
+   }
+   else  if(selectedValue == "lemah pantai"){
+    myMarker.closePopup();
+  latitute7 = 3.1225;
+  longitute7 =101.66449;
+        map.setView([ latitute7,longitute7] , 17);
+        myMarker.setLatLng([ latitute7,longitute7]);
+        lat =latitute7.toFixed(8);
+        lon = latitute7.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute7 + "<br />Lon " + longitute7).openPopup();
+   }
+   else  if(selectedValue == "cheras"){
+    myMarker.closePopup();
+  latitute8 = 3.108932;
+  longitute8 = 101.728426;
+        map.setView([ latitute8,longitute8] , 17);
+        myMarker.setLatLng([ latitute8,longitute8]);
+        lat =latitute8.toFixed(8);
+        lon = latitute8.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute8 + "<br />Lon " + longitute8).openPopup();
+   }
+   else  if(selectedValue == "bandar tun razak"){
+    myMarker.closePopup();
+  latitute9 = 3.077438;
+  longitute9 =101.719666;
+        map.setView([ latitute9,longitute9] , 17);
+        myMarker.setLatLng([ latitute9,longitute9]);
+        lat =latitute9.toFixed(8);
+        lon = latitute9.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute9 + "<br />Lon " + longitute9).openPopup();
+   }
+   else  if(selectedValue == "seputeh"){
+    myMarker.closePopup();
+  latitute10 = 3.1150;
+  longitute10 =101.6797;
+        map.setView([ latitute10,longitute10] , 17);
+        myMarker.setLatLng([ latitute10,longitute10]);
+        lat =latitute10.toFixed(8);
+        lon = latitute10.toFixed(8);
+        myMarker.bindPopup("<br/>Lat " +  latitute10 + "<br />Lon " + longitute10).openPopup();
+   }
+}
+
+
+//Datalist one
+var dataList1 = document.getElementById('json-datalist1');
+var input1 = document.getElementById('ajax1');
+
+// Create a new XMLHttpRequest.
+var request1 = new XMLHttpRequest();
+
+// Handle state changes for the request.
+request1.onreadystatechange = function(response1) {
+  if (request1.readyState === 4) {
+    if (request1.status === 200) {
+      // Parse the JSON
+      var jsonOptions = JSON.parse(request1.responseText);
+  
+      // Loop over the JSON array.
+      jsonOptions.forEach(function(item) {
+        // Create a new <option> element.
+        var option = document.createElement('option');
+        
+        // Set the value using the item in the JSON array.
+        option.value = item;
+        // Add the <option> element to the <datalist>.
+        dataList1.appendChild(option);
+      });
+      
+      // Update the placeholder text.
+      input1.placeholder = "Choose one parliament";
+    } else {
+      // An error occured :(
+      input1.placeholder = "Couldn't load datalist options :(";
+    }
+  }
+};
+
+
+// Update the placeholder text.
+input1.placeholder = "Loading options...";
+
+// Set up and make the request.
+request1.open('GET', '/static/geojson/parlimentdata.json', true);
+request1.send();
+
+
+//datalist two
+function parentCall(){
+  
+  jQuery("#json-datalist2").empty();
+var dataList2 = document.getElementById('json-datalist2');
+var input2 = document.getElementById('ajax2');
+ 
+// Create a new XMLHttpRequest.
+var request = new XMLHttpRequest();
+
+// Handle state changes for the request.
+request.onreadystatechange = function(response) {
+
+  if (request.readyState === 4) {
+    if (request.status === 200) {
+      // Parse the JSON
+      var jsonOptions = JSON.parse(request.responseText);
+      var data = JSON.stringify(jsonOptions);
+  // console.log("myjson"+jsonOptions);
+      // console.log("my data"+data)
+     
+      var i;
+      var j=0;
+      var inputdata= document.getElementById("ajax1").value;
+      if(inputdata.toUpperCase()=== "KEPONG"){
+  for (i=0 ;i<jsonOptions.length ;i++)
+  {
+    // console.log(jsonOptions[i].parlamenName);
+   
+    values=jsonOptions[1].sb[j].ll[i].locality;
+    lati=jsonOptions[1].sb[j].ll[i].latitude;
+    loni=jsonOptions[1].sb[j].ll[i].longitude;
+
+    dataarray.push(values+","+lati+","+loni);
+    localStorage.setItem("value",i+1);
+    console.log(jsonOptions[1].sb[j].ll.length);
+   
+    // if(localStorage.getItem('value') >= jsonOptions[1].sb[j].ll.length){
+    //   j++;
+    //   i=0;
+    //   values1=jsonOptions[1].sb[j].ll[0].locality;
+    //   console.log(i);
+    // console.log(jsonOptions[1].sb[j].ll[0].locality);
+    // dataarray.push(values1);
+    //   console.log("i value"+i+"j values"+j);
+    // }
+    if(localStorage.getItem('value') >=jsonOptions[1].sb[j].ll.length){
+     
+      j++
+      console.log(jsonOptions[1].sb[j].ll.length);
+      for(i=1; i<jsonOptions[1].sb[j].ll.length;i++ ){
+        console.log(jsonOptions[1].sb[j].ll[i].locality);
+        values1 =jsonOptions[1].sb[j].ll[i].locality;
+        lati=jsonOptions[1].sb[j].ll[i].latitude;
+    loni=jsonOptions[1].sb[j].ll[i].longitude;
+
+    dataarray.push(values1+","+lati+","+loni);
+
+      }
+    }
+  }
+  
+    
+  }
+ else  if(inputdata.toUpperCase()=== "BATU"){
+   jQuery("#json-datalist2").empty();
+   dataarray=[];
+  for (i=0 ;i<jsonOptions.length ;i++)
+  {
+    // console.log(jsonOptions[i].parlamenName);
+   
+    values=jsonOptions[0].sb[j].ll[i].locality;
+    lati=jsonOptions[0].sb[j].ll[i].latitude;
+    loni=jsonOptions[0].sb[j].ll[i].longitude;
+
+    dataarray.push(values+","+lati+","+loni);
+  
+    localStorage.setItem("value",i+1);
+    console.log(jsonOptions[0].sb[j].ll.length);
+   
+    // if(localStorage.getItem('value') >= jsonOptions[1].sb[j].ll.length){
+    //   j++;
+    //   i=0;
+    //   values1=jsonOptions[1].sb[j].ll[0].locality;
+    //   console.log(i);
+    // console.log(jsonOptions[1].sb[j].ll[0].locality);
+    // dataarray.push(values1);
+    //   console.log("i value"+i+"j values"+j);
+    // }
+    if(localStorage.getItem('value') >=jsonOptions[0].sb[j].ll.length){
+     
+      j++
+      console.log(jsonOptions[0].sb[j].ll.length);
+      for(i=1; i<jsonOptions[0].sb[j].ll.length;i++ ){
+        console.log(jsonOptions[0].sb[j].ll[i].locality);
+        values1 =jsonOptions[0].sb[j].ll[i].locality;
+        lati=jsonOptions[1].sb[j].ll[i].latitude;
+    loni=jsonOptions[1].sb[j].ll[i].longitude;
+
+    dataarray.push(values1+","+lati+","+loni);
+      
+
+      }
+    }
+  }
+  
+    
+  }
+    
+console.log("data array"+dataarray);
+dataarray.forEach(function(item) {
+        // Create a new <option> element.
+        var option = document.createElement('option');
+        option.classList.add("myoption");
+        // Set the value using the item in the JSON array.
+        option.value = item;
+        // Add the <option> element to the <datalist>.
+        dataList2.appendChild(option);
+      });
+      
+      // Loop over the JSON array
+      // Update the placeholder text.
+      input2.placeholder = "choose one sub location";
+    } else {
+      // An error occured :(
+      input2.placeholder = "Couldn't load datalist options :(";
+    }
+  }
+};
+
+// Update the placeholder text.
+input2.placeholder = "Loading options...";
+
+// Set up and make the request.
+request.open('GET', '/static/geojson/mapdata.json', true);
+request.send();
+
+
+}
+
+
     </script>
   </body>
 </html>
